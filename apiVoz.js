@@ -1,3 +1,5 @@
+const elementoChute = document.querySelector("#chute")
+
 window.SpeechRecognition = window.SpeechRecongnition || webkitSpeechRecognition;
 
 var recognition = new SpeechRecognition()
@@ -5,9 +7,17 @@ recognition.lang = "pt-Br"
 
 recognition.start()
 
-console.log(recognition)
 
 recognition.addEventListener("result", onSpeak)
 function onSpeak(e) {
-    console.log(e.results[0][0].transcript )
+    chute = e.results[0][0].transcript
+    exibeChutenaTela(chute)
+    verificaSeValorValido(chute)
+    
+}
+function exibeChutenaTela(chute){
+    elementoChute.innerHTML = ` 
+    <div>Você disse</div>
+    <span class=”box”>${chute}</span>
+    `
 }
